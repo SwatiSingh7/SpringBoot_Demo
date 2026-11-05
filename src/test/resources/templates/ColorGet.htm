@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Color Square</title>
+
+    <style>
+        #square {
+            width: 150px;
+            height: 150px;
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+<style>
+        #square1 {
+            width: 150px;
+            height: 150px;
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+
+</head>
+<body>
+<center>
+<h2>Select Color</h2>
+
+<select id="colorSelect" onchange="changeColor()">
+    <option value="">--Select--</option>
+    <option value="red">Red</option>
+<option value="Green">Green</option>
+<option value="Blue">Blue</option>
+<option value="yellow">Yellow</option>
+<option value="orange">Orange</option>
+<option value="pink">Pink</option>
+
+</select>
+
+<form name="Form1"
+method="post"
+action="http://localhost:8080/showColor">
+<B>Color:</B>
+<select name="selectedColor" id="colorSelect" onchange="changeColor1()" size="1">
+<option value="">--Select--</option>
+<option value="Red">Red</option>
+<option value="Green">Green</option>
+<option value="Blue">Blue</option>
+<option value="yellow">Yellow</option>
+<option value="orange">Orange</option>
+<option value="pink">Pink</option>
+</select>
+<button type="submit" apply color </button>
+<button onclick="changeColor1()" color ch </button>
+</form>
+<div id="square1"></div>
+
+<div id="square"
+     th:style="'background-color:' + ${color}">
+</div>
+<script>
+
+function changeColor() {
+
+    let selectedColor =
+        document.getElementById("colorSelect").value;
+
+    let square =
+        document.getElementById("square1");
+
+    
+        square.style.backgroundColor = selectedColor;
+    
+}
+
+</script>
+<script>
+
+function changeColor1() {    
+	 
+	 let color = document.getElementById("color").value;
+
+	    fetch('/showColor?color=' + color, {
+	        method: 'POST'
+	    })
+	    .then(response => response.text())
+	    .then(data => {
+	        document.getElementById("square").style.backgroundColor = data;
+	    });
+   
+}
+</script>    
+<script>
+    function applyColor() {
+        let selectedColor = document.getElementById("colorSelect").value;
+        document.getElementById("square").style.backgroundColor = selectedColor;
+    }
+</script>
+<br><br>
+<input type=submit value="submit">
+
+</body>
+</html>
+
